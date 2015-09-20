@@ -7,9 +7,14 @@ import time
 import os
 import sys
 
+
+#ads1232-1
 DRDY = 29
 SCLK = 31
 PWDN = 15
+
+
+
 
 #std GPIO for DataReady is 29, for SerialClock 31
 GPIO.setmode(GPIO.BOARD)
