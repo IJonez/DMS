@@ -9,7 +9,7 @@ import sys
 
 DRDY = 29
 SCLK = 31
-PWDN = 29
+PWDN = 15
 
 #std GPIO for DataReady is 29, for SerialClock 31
 GPIO.setmode(GPIO.BOARD)
