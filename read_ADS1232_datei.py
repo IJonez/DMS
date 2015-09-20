@@ -65,12 +65,12 @@ def ISR_DRDY(channel):
     global flag
     actual = time.time()
     ausgabe = ''
+    ausgabe_int = ausgabe
     #Data is retrieved once
     #print('in der ISR')
     GPIO.remove_event_detect(DRDY)
     
     while i < 24:
-        ausgabe = str(ausgabe)
         GPIO.output(SCLK, 1)
         time.sleep(.0001)
         ausgabe += str(GPIO.input(DRDY))
@@ -86,8 +86,10 @@ def ISR_DRDY(channel):
     
     #print( actual - time.time() )
     #print(ausgabe)
+    
     i = 0
     #ausgabe = ''
+
     actual = 0
     GPIO.add_event_detect(DRDY, GPIO.FALLING, callback = ISR_DRDY)
 
