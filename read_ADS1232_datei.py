@@ -64,8 +64,8 @@ def ISR_DRDY(channel):
     global actual
     global flag
     actual = time.time()
-    ausgabe = ''
-    ausgabe_int = ausgabe
+    
+    ausgabe_int = ''
     #Data is retrieved once
     #print('in der ISR')
     GPIO.remove_event_detect(DRDY)
@@ -73,12 +73,15 @@ def ISR_DRDY(channel):
     while i < 24:
         GPIO.output(SCLK, 1)
         time.sleep(.0001)
-        ausgabe += str(GPIO.input(DRDY))
+        ausgabe_int += str(GPIO.input(DRDY))
         GPIO.output(SCLK, 0)
         time.sleep(.0001)
         i += 1
         if i == 24:
             flag = 1
+            ausgabe = ausgabe_int
+            ausgabe_int = ''
+            
     #Forces DRDY to "high", so a data ready state can be recognized
     GPIO.output(SCLK, 1)
     time.sleep(.0001)
@@ -98,7 +101,7 @@ def CALIB(channel):
     global ausgabe
     global i
     global actual
-    actual = time.time()
+    #actual = time.time()
     #Data is retrieved once
     print('in der CALIB')
     #event detect must be removed to stop 'ghost' clock signals...don't ask me where they came from but they do come if you outcomment the next line....
